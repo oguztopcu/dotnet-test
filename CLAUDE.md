@@ -135,6 +135,7 @@ src/
     ├── Middleware/
     │   ├── CorrelationIdMiddleware.cs
     │   ├── TenantMiddleware.cs
+    │   ├── RequiresTenantAttribute.cs
     │   ├── IdempotencyMiddleware.cs
     │   └── ExceptionHandlingMiddleware.cs
     ├── Models/
@@ -426,9 +427,8 @@ Migration'lar `AcilEvrak.Infrastructure/Migrations/` klasöründe yaşar.
 ```sql
 CREATE TABLE sessions (
     id                  BIGSERIAL PRIMARY KEY,
-    uuid                UUID NOT NULL DEFAULT gen_random_uuid(),
-    user_id             BIGINT NOT NULL,
-    tenant_id           BIGINT NOT NULL,
+    uuid                UUID NOT NULL,
+    user_id             BIGINT NOT NULL REFERENCES users(id),
     device_name         VARCHAR(255),
     ip_address          VARCHAR(45),
     user_agent          TEXT,
@@ -506,7 +506,7 @@ Her feature kendi `ENDPOINTS.md` dosyasını WebAPI/Controllers yanında içerir
 **Açıklama:** Ne iş yapar
 **Yetki:** Public / JWT / Admin
 **Idempotency Key:** Zorunlu / Opsiyonel / Yok
-**Headers:** X-Correlation-Id (opsiyonel), X-Tenant-Id (zorunlu, tüm endpointler)
+**Headers:** X-Correlation-Id (opsiyonel), X-Tenant-Id (yalnızca [RequiresTenant] endpoint'lerinde zorunlu)
 **Request:** Alan açıklamaları
 **Response:** Başarılı dönüş
 **Hatalar:** HTTP kodu ve açıklaması
