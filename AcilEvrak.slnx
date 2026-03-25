@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/AcilEvrak.Application/AcilEvrak.Application.csproj" />
+    <Project Path="src/AcilEvrak.Domain/AcilEvrak.Domain.csproj" />
+    <Project Path="src/AcilEvrak.Infrastructure/AcilEvrak.Infrastructure.csproj" />
+    <Project Path="src/AcilEvrak.WebAPI/AcilEvrak.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/IntegrationTests/IntegrationTests.csproj" />
+  </Folder>
+</Solution>
